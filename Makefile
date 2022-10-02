@@ -121,10 +121,6 @@ ifneq (,$(findstring unix,$(platform)))
       endif
    endif
 
-ifneq ($(findstring Linux,$(shell uname -s)),)
-   HAVE_CDROM = 1
-endif
-
 # OS X
 else ifeq ($(platform), osx)
    TARGET  := $(TARGET_NAME)_libretro.dylib
