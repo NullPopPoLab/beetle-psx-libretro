@@ -13,6 +13,7 @@
 #include <streams/file_stream.h>
 #include <string/stdstring.h>
 #include <rhash.h>
+#include <sys/stat.h>
 #include "ugui_tools.h"
 #include "rsx/rsx_intf.h"
 #include "libretro_cbs.h"
@@ -154,6 +155,8 @@ enum
    REGION_NA = 1,
    REGION_EU = 2,
 };
+
+void retro_make_savedir();
 
 static bool firmware_is_present(unsigned region)
 {
@@ -4467,6 +4470,8 @@ void retro_run(void)
             char ext[64];
             const char *memcard = NULL;
 
+			retro_make_savedir();
+
             // Save contents of left memory card to previously selected index
             snprintf(ext, sizeof(ext), "%d.mcr", memcard_left_index_old);
             memcard = MDFN_MakeFName(MDFNMKF_SAV, 0, ext);
@@ -4493,6 +4498,8 @@ void retro_run(void)
          {
             char ext[64];
             const char *memcard = NULL;
+
+			retro_make_savedir();
 
             // Save contents of right memory card to previously selected index
             snprintf(ext, sizeof(ext), "%d.mcr", memcard_right_index_old);
@@ -4658,6 +4665,8 @@ void retro_run(void)
             int index = i;
             if (i == 0) index = memcard_left_index;
             else if (i == 1) index = memcard_right_index;
+
+			retro_make_savedir();
 
             snprintf(ext, sizeof(ext), "%d.mcr", index);
             memcard = MDFN_MakeFName(MDFNMKF_SAV, 0, ext);
@@ -5122,6 +5131,19 @@ void retro_cheat_set(unsigned index, bool enabled, const char * codeLine)
    }
 }
 
+void retro_make_savedir(){
+
+   static char fullpath[4096];
+
+	if(shared_memorycards)return;
+
+     snprintf(fullpath, sizeof(fullpath), "%s%c%s",
+           retro_save_directory,
+           retro_slash,
+           retro_cd_base_name);
+	mkdir(fullpath,0777);
+}
+
 // Use a simpler approach to make sure that things go right for libretro.
 const char *MDFN_MakeFName(MakeFName_Type type, int id1, const char *cd1)
 {
@@ -5133,11 +5155,22 @@ const char *MDFN_MakeFName(MakeFName_Type type, int id1, const char *cd1)
    switch (type)
    {
       case MDFNMKF_SAV:
-         r = snprintf(fullpath, sizeof(fullpath), "%s%c%s.%s",
-               retro_save_directory,
-               retro_slash,
-               shared_memorycards ? "mednafen_psx_libretro_shared" : retro_cd_base_name,
-               cd1);
+		if(shared_memorycards){
+	         r = snprintf(fullpath, sizeof(fullpath), "%s%c%s.%s",
+	               retro_save_directory,
+	               retro_slash,
+	               "mednafen_psx_libretro",
+	               cd1);
+		}
+		else{
+	         r = snprintf(fullpath, sizeof(fullpath), "%s%c%s%c%s.%s",
+	               retro_save_directory,
+	               retro_slash,
+	               retro_cd_base_name,
+	               retro_slash,
+	               "mednafen_psx_libretro",
+	               cd1);
+		}
          break;
       case MDFNMKF_FIRMWARE:
          r = snprintf(fullpath, sizeof(fullpath), "%s%c%s", retro_base_directory, retro_slash, cd1);
