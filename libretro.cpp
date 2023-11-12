@@ -174,16 +174,16 @@ static bool firmware_is_present(unsigned region)
    {
       if (override_bios == 1)
       {
-			bios_name_list[0] = "psx/psxonpsp660.bin";
-			bios_name_list[1] = "psx/PSXONPSP660.bin";
+			bios_name_list[0] = "psxonpsp660.bin";
+			bios_name_list[1] = "PSXONPSP660.bin";
 			bios_name_list[2] = NULL;
 			bios_sha1 = "96880D1CA92A016FF054BE5159BB06FE03CB4E14";
       }
 		
       else if (override_bios == 2)
       {
-			bios_name_list[0] = "psx/ps1_rom.bin";
-			bios_name_list[1] = "psx/PS1_ROM.bin";
+			bios_name_list[0] = "ps1_rom.bin";
+			bios_name_list[1] = "PS1_ROM.bin";
 			bios_name_list[2] = NULL;
 			bios_sha1 = "C40146361EB8CF670B19FDC9759190257803CAB7";
       }
@@ -234,34 +234,34 @@ static bool firmware_is_present(unsigned region)
 
    if (region == REGION_JP)
    {
-      bios_name_list[0] = "psx/scph5500.bin";
-      bios_name_list[1] = "psx/SCPH5500.bin";
-      bios_name_list[2] = "psx/SCPH-5500.bin";
+      bios_name_list[0] = "scph5500.bin";
+      bios_name_list[1] = "SCPH5500.bin";
+      bios_name_list[2] = "SCPH-5500.bin";
       bios_name_list[3] = NULL;
       bios_sha1 = "B05DEF971D8EC59F346F2D9AC21FB742E3EB6917";
    }
    else if (region == REGION_NA)
    {
-      bios_name_list[0] = "psx/scph5501.bin";
-      bios_name_list[1] = "psx/SCPH5501.bin";
-      bios_name_list[2] = "psx/SCPH-5501.bin";
-      bios_name_list[3] = "psx/scph5503.bin";
-      bios_name_list[4] = "psx/SCPH5503.bin";
-      bios_name_list[5] = "psx/SCPH-5503.bin";
-      bios_name_list[6] = "psx/scph7003.bin";
-      bios_name_list[7] = "psx/SCPH7003.bin";
-      bios_name_list[8] = "psx/SCPH-7003.bin";
+      bios_name_list[0] = "scph5501.bin";
+      bios_name_list[1] = "SCPH5501.bin";
+      bios_name_list[2] = "SCPH-5501.bin";
+      bios_name_list[3] = "scph5503.bin";
+      bios_name_list[4] = "SCPH5503.bin";
+      bios_name_list[5] = "SCPH-5503.bin";
+      bios_name_list[6] = "scph7003.bin";
+      bios_name_list[7] = "SCPH7003.bin";
+      bios_name_list[8] = "SCPH-7003.bin";
       bios_name_list[9] = NULL;
       bios_sha1 = "0555C6FAE8906F3F09BAF5988F00E55F88E9F30B";
    }
    else if (region == REGION_EU)
    {
-      bios_name_list[0] = "psx/scph5502.bin";
-      bios_name_list[1] = "psx/SCPH5502.bin";
-      bios_name_list[2] = "psx/SCPH-5502.bin";
-      bios_name_list[3] = "psx/scph5552.bin";
-      bios_name_list[4] = "psx/SCPH5552.bin";
-      bios_name_list[5] = "psx/SCPH-5552.bin";
+      bios_name_list[0] = "scph5502.bin";
+      bios_name_list[1] = "SCPH5502.bin";
+      bios_name_list[2] = "SCPH-5502.bin";
+      bios_name_list[3] = "scph5552.bin";
+      bios_name_list[4] = "SCPH5552.bin";
+      bios_name_list[5] = "SCPH-5552.bin";
       bios_name_list[6] = NULL;
       bios_sha1 = "F6BC2D1F5EB6593DE7D089C425AC681D6FFFD3F0";
    }
